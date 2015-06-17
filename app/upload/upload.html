@@ -1,0 +1,19 @@
+<template name="upload">
+  <div id="upload" ondragover="event.preventDefault()">
+    <div class="valign-wrapper drop-area">
+      <div class="valign center-align">
+        {{#if isStatus 'default'}}
+          You drop a
+          <div class="highlight">GIF</div>
+          on me
+        {{else}}
+          {{#if isStatus 'hover'}}
+            ...
+          {{else}}
+            {{> spinner size='big'}}
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

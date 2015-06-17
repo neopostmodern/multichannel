@@ -1,0 +1,41 @@
+<template name="home">
+  <div id="home">
+    <table>
+      {{#each projects}}
+        <tr>
+          <td>{{name}}</td>
+          <td class="action like">
+            <!-- todo: implement likes -->
+            <a class="waves-effect btn-flat disabled">
+              <i class="mdi-action-favorite-outline"></i>
+            </a>
+          </td>
+          <td class="action">
+            <!-- todo: implement delete -->
+            <a class="waves-effect btn-flat disabled">
+              <i class="mdi-action-delete"></i>
+            </a>
+          </td>
+          <td class="action">
+            <a class="waves-effect btn-flat" href="{{urlFor 'edit'}}">
+              <i class="mdi-editor-mode-edit"></i>
+            </a>
+          </td>
+          <td class="action">
+            <!-- todo: implement show -->
+            <a class="waves-effect btn-flat disabled">
+              <i class="mdi-action-open-in-new"></i>
+            </a>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td class="grey-text">
+            <h4>No projects listed</h4>
+            You can add one <a href="{{urlFor 'upload'}}">here</a>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+  </div>
+</template>

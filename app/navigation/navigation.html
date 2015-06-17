@@ -1,0 +1,14 @@
+<template name="navigation">
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="{{pathFor 'home'}}" class="brand-logo">Multichannel</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {{#each routes}}
+          <li class="{{#if isActiveRoute route}}active{{/if}}">
+            <a href="{{pathFor route}}">{{title}}</a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </nav>
+</template>

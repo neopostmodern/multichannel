@@ -1,0 +1,21 @@
+<template name="edit">
+  {{#with project}}
+    <h1>{{name}}</h1>
+
+    <div id="mc-edit-frames">
+      {{#each frames}}
+        <div class="frame row">
+          <div class="l1 col">
+            <h2>{{index}}</h2>
+          </div>
+          <div class="l3 col">
+            <img src="{{imgsrc gif}}" />
+          </div>
+          <div class="l8 col">
+            ...
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/with}}
+</template>
