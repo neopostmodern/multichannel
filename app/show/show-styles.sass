@@ -1,0 +1,92 @@
+$mc-show-action-size: 3rem
+
+#mc-show-back
+  position: fixed
+  top: 2rem
+  left: 2rem
+
+  font-size: $mc-show-action-size
+
+  z-index: 5
+
+#mc-show
+  width: 100%
+  height: 100%
+
+  overflow: hidden
+
+#mc-show-gif
+  position: fixed
+  left: 10%
+  top: 10%
+  z-index: 2
+
+#mc-show-container
+  width: 100%
+  height: 100%
+  background-color: black
+  display: flex
+  align-items: stretch
+
+  font-size: 0
+
+.mc-show-reel-container
+  width: 100%
+
+.mc-show-reel
+  position: relative
+
+  img
+    width: 100%
+
+.mc-show-frame-wrapper
+  position: relative
+
+  &.mc-show-frame-wrapper--descriptions:hover
+    img
+      opacity: 0.2
+    .mc-show-frame-explanation
+      display: block
+
+.mc-show-frame-explanation
+  display: none
+  color: white
+  font-size: 4rem
+  position: absolute
+  top: 0
+  z-index: 1
+
+  font-family: Arial
+
+
+#mc-show-actions
+  position: fixed
+  right: 5rem
+  bottom: 5rem
+  z-index: 2
+
+  .btn-flat
+    padding-right: 1rem
+    padding-left: 1rem
+
+    height: $mc-show-action-size
+    line-height: $mc-show-action-size
+
+    i
+      font-size: $mc-show-action-size
+      color: white
+
+    svg
+      margin-top: 0.1 * $mc-show-action-size
+      height: 0.9 * $mc-show-action-size
+      width: 0.9 * $mc-show-action-size
+      fill: white
+
+    &.disabled
+      i
+        color: gray
+      svg
+        fill: gray
+
+#mc-show-audios
+  display: none

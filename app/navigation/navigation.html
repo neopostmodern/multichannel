@@ -1,14 +1,54 @@
 <template name="navigation">
+  {{#if currentUser}}
+    <!-- todo: might be necessary to always have existing? -->
+    <ul id="user-dropdown" class="dropdown-content">
+      <li>
+        <!-- todo: add profile -->
+        <a href="#!">Profile</a>
+      </li>
+      <li>
+        <!-- todo: add 'list my channels' -->
+        <a href="#!">My Multichannels</a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a id="mc-login-logout">Logout</a>
+      </li>
+    </ul>
+  {{/if}}
+
   <nav>
     <div class="nav-wrapper container">
-      <a href="{{pathFor 'home'}}" class="brand-logo">Multichannel</a>
+      <ul class="left hide-on-med-and-down">
+        <li class="{{#if isActiveRoute 'home'}}active{{/if}}">
+          <a href="{{pathFor 'home'}}">Browse</a>
+        </li>
+
+        {{#if isActiveRoute 'edit'}}
+          <li class="{{#if isActiveRoute 'edit'}}active{{/if}}">
+            <a href="#!">Editing...</a>
+          </li>
+        {{/if}}
+      </ul>
+      <a href="{{pathFor 'home'}}" class="brand-logo center">Multichannel</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#each routes}}
           <li class="{{#if isActiveRoute route}}active{{/if}}">
             <a href="{{pathFor route}}">{{title}}</a>
           </li>
         {{/each}}
+        {{#if currentUser}}
+          <li>
+            {{> login_button}}
+          </li>
+        {{else}}
+          <li>
+            <a class="modal-trigger" href="#login-modal">Log in</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </nav>
+
+  {{> login}}
 </template>

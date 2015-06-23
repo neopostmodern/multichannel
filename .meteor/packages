@@ -5,8 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 iron:router
 coffeescript
 fourseven:scss
@@ -16,3 +14,10 @@ cfs:filesystem
 
 
 neopostmodern:gif-explode
+underscore
+accounts-meteor-developer
+service-configuration
+cfs:gridfs
+accounts-twitter
+accounts-facebook
+accounts-google

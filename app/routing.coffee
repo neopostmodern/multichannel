@@ -1,6 +1,6 @@
-#Router.configure(
-#  layoutTemplate: 'layout'
-#)
+Router.configure(
+  loadingTemplate: 'loading'
+)
 
 share.RoutesInMenu = [
   title: 'Upload'

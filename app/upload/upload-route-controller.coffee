@@ -1,6 +1,12 @@
 @UploadRouteController = RouteController.extend(
   template: 'upload'
   layoutTemplate: 'default_layout'
+
+  # hack: what are these subscriptions, really?
+  waitOn: -> [
+    Meteor.subscribe 'mc.projects'
+    Meteor.subscribe 'mc.gifs'
+  ]
 )
 
 UploadRouteController.events(
@@ -40,6 +46,7 @@ UploadRouteController.events(
 
       if error?
         Materialize.toast error, 4000, "red"
+        state.set 'status', 'default'
         return
 
       uploadTracker = Tracker.autorun ->

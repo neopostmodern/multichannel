@@ -1,6 +1,9 @@
 <template name="edit">
   {{#with project}}
-    <h1>{{name}}</h1>
+    <div class="input-field">
+      <input type="text" value="{{name}}" id="mc-edit-project-name" />
+      <label for="mc-edit-project-name" class="{{materialHelper name}}">Project Name</label>
+    </div>
 
     <div id="mc-edit-frames">
       {{#each frames}}
@@ -12,10 +15,23 @@
             <img src="{{imgsrc gif}}" />
           </div>
           <div class="l8 col">
-            ...
+            <div class="input-field">
+              <input type="text" value="{{text}}" id="mc-edit-frame-name-{{gif}}" class="mc-edit-frame-name" length="30" maxlength="30" />
+              <label for="mc-edit-frame-name-{{gif}}" class="{{materialHelper text}}">Description</label>
+            </div>
           </div>
         </div>
       {{/each}}
+    </div>
+  {{else}}
+    <div class="valign-wrapper" style="height: 80%">
+      <div class="valign center-align" style="width: 100%">
+        {{#if error}}
+          <h3>{{error}}</h3>
+        {{else}}
+          <h3>Please log in</h3>
+        {{/if}}
+      </div>
     </div>
   {{/with}}
 </template>

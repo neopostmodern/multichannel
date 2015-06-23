@@ -2,16 +2,20 @@
   <div id="upload" ondragover="event.preventDefault()">
     <div class="valign-wrapper drop-area">
       <div class="valign center-align">
-        {{#if isStatus 'default'}}
-          You drop a
-          <div class="highlight">GIF</div>
-          on me
-        {{else}}
-          {{#if isStatus 'hover'}}
-            ...
+        {{#if currentUser}}
+          {{#if isStatus 'default'}}
+            You drop a
+            <div class="highlight">GIF</div>
+            on me
           {{else}}
-            {{> spinner size='big'}}
+            {{#if isStatus 'hover'}}
+              ...
+            {{else}}
+              {{> spinner size='big'}}
+            {{/if}}
           {{/if}}
+        {{else}}
+          Please log in first
         {{/if}}
       </div>
     </div>

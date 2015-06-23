@@ -4,3 +4,6 @@ UI.registerHelper 'imgsrc', (image) ->
     imageObject = Gifs.findOne image
 
   return imageObject.url()
+
+UI.registerHelper 'materialHelper', (text) ->
+  if text? and text.length? then " active " else ""

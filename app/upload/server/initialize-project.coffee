@@ -1,5 +1,10 @@
 Meteor.methods
   'multichannel.initialize-project': (options) ->
+    # todo: reformat code to make more readable
+
+    if not @userId?
+      throw new Meteor.Error 401, "Please log in to create a multichannel"
+
     gif = Gifs.findOne options.fileId
 
     @unblock()
@@ -8,19 +13,28 @@ Meteor.methods
       name: gif.name()
       originalGif: gif._id
       frames: []
-    , (error, projectId) ->
+      userId: @userId
+      likes: 0
+    , (error, projectId) =>
       # todo: error handling
       if error?
         console.dir error
         return
 
+      Meteor.users.update _id: @userId,
+        $push:
+          projects: projectId
+
+        # todo: error handling
+
       frameIndex = 0
 
-      GifExplode.Do gif.createReadStream('gifs').path, (frame) ->
+      GifExplode.Do gif.createReadStream('gifs'), (frame) ->
         _frameIndex = frameIndex
         frameIndex += 1
         fsFrame = new FS.File()
         fsFrame.attachData(frame, { type: 'image/gif' })
+        fsFrame.name(Meteor.uuid() + ".gif")
         Gifs.insert(
           fsFrame
         , (error, frameObject) ->

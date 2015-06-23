@@ -1,29 +1,45 @@
 <template name="home">
   <div id="home">
+    <!--<div class="row">-->
+      <!--<ul class="tabs">-->
+        <!--<li class="tab col s3"><a href="#trending" class="active">Trending</a></li>-->
+        <!--<li class="tab col s3"><a href="#all">All</a></li>-->
+        <!--<li class="tab col s3"><a href="#your">Your</a></li>-->
+        <!--<li class="tab col s3"><a href="#likes">Likes</a></li>-->
+      <!--</ul>-->
+    <!--</div>-->
     <table>
       {{#each projects}}
         <tr>
           <td>{{name}}</td>
+
           <td class="action like">
-            <!-- todo: implement likes -->
-            <a class="waves-effect btn-flat disabled">
-              <i class="mdi-action-favorite-outline"></i>
+            <a class="waves-effect btn-flat mc-home-like">
+              {{#if userHasLiked _id}}
+                <i class="mdi-action-favorite"></i>
+              {{else}}
+                <i class="mdi-action-favorite-outline"></i>
+              {{/if}}
             </a>
           </td>
+
           <td class="action">
             <!-- todo: implement delete -->
-            <a class="waves-effect btn-flat disabled">
-              <i class="mdi-action-delete"></i>
-            </a>
+            {{#if userOwnsProject _id}}
+              <a class="waves-effect btn-flat disabled">
+                <i class="mdi-action-delete"></i>
+              </a>
+            {{/if}}
           </td>
           <td class="action">
-            <a class="waves-effect btn-flat" href="{{urlFor 'edit'}}">
-              <i class="mdi-editor-mode-edit"></i>
-            </a>
+            {{#if userOwnsProject _id}}
+              <a class="waves-effect btn-flat" href="{{urlFor 'edit'}}">
+                <i class="mdi-editor-mode-edit"></i>
+              </a>
+            {{/if}}
           </td>
           <td class="action">
-            <!-- todo: implement show -->
-            <a class="waves-effect btn-flat disabled">
+            <a class="waves-effect btn-flat" href="{{urlFor 'show'}}">
               <i class="mdi-action-open-in-new"></i>
             </a>
           </td>

@@ -1,0 +1,82 @@
+<template name="show">
+  <div id="mc-show">
+    <div id="mc-show-back">
+      <a href="{{urlFor 'home'}}">
+        <i class="mdi-navigation-arrow-back white-text"></i>
+      </a>
+    </div>
+
+    {{#with project}}
+      {{> mc_show_audio}}
+
+      {{#if isAnimatedGifVisible}}
+        <img src="{{imgsrc originalGif}}" id="mc-show-gif" />
+      {{/if}}
+
+      <div id="mc-show-container">
+        {{#each reels}}
+          <div class="mc-show-reel-container">
+            <div class="mc-show-reel" style="bottom: {{dynamicOffset .}}px;">
+              {{#each ../frames}}
+                {{> mc_show_frame}}
+              {{/each}}
+              {{#each ../frames}}
+                {{> mc_show_frame}}
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/with}}
+
+    <div id="mc-show-actions">
+      <a class="btn-flat waves-effect" id="mc-show-toggle-animated-gif-visible">
+        <i class="{{#if isAnimatedGifVisible}}mdi-image-crop-original{{else}}mdi-image-image{{/if}} white-text"></i>
+      </a>
+      <a class="btn-flat waves-effect" id="mc-show-toggle-description-visible">
+        {{#if isDescriptionVisible}}
+          <svg viewBox="0 0 24 24">
+            <path fill="white" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M9.41,6L12,8.59L14.59,6L16,7.41L13.41,10L16,12.59L14.59,14L12,11.41L9.41,14L8,12.59L10.59,10L8,7.41L9.41,6Z" />
+          </svg>
+        {{else}}
+          <svg viewBox="0 0 24 24">
+            <path fill="white" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M5,5V7H19V5H5M5,9V11H13V9H5M5,13V15H15V13H5Z" />
+          </svg>
+        {{/if}}
+      </a>
+
+      <a class="btn-flat waves-effect" id="mc-show-toggle-fullscreen">
+        <i class="{{#if isFullscreen}}mdi-navigation-fullscreen-exit{{else}}mdi-navigation-fullscreen{{/if}}"></i>
+      </a>
+      <a class="btn-flat waves-effect" id="mc-show-toggle-audio-enabled">
+        <i class="{{#if isAudioEnabled}}mdi-av-volume-off{{else}}mdi-av-volume-up{{/if}}"></i>
+      </a>
+      <a class="btn-flat waves-effect" id="mc-show-toggle-playing">
+        <i class="{{#if isPlaying}}mdi-av-pause-circle-outline{{else}}mdi-av-play-circle-outline{{/if}}"></i>
+      </a>
+      <a class="btn-flat waves-effect {{#if isMinimumReels}}disabled{{/if}}" id="mc-show-remove-channel">
+        <i class="mdi-content-remove-circle-outline"></i>
+      </a>
+      <a class="btn-flat waves-effect {{#if isMaximumReels}}disabled{{/if}}" id="mc-show-add-channel">
+        <i class="mdi-content-add-circle-outline"></i>
+      </a>
+      <!--<svg viewBox="0 0 24 24" >-->
+        <!--<path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,13H17V11H7" />-->
+      <!--</svg>-->
+      <!--<svg viewBox="0 0 24 24" id="actions-add-channel">-->
+        <!--<path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />-->
+      <!--</svg>-->
+    </div>
+  </div>
+</template>
+
+<template name="mc_show_frame">
+  <div class="mc-show-frame-wrapper {{#if isDescriptionVisible}}mc-show-frame-wrapper--descriptions{{/if}}">
+    <img src="{{imgsrc gif}}" />
+
+    <div class="mc-show-frame-explanation">
+      {{text}}
+    </div>
+  </div>
+
+</template>
