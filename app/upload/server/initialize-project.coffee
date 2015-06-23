@@ -51,6 +51,7 @@ Meteor.methods
                   index: _frameIndex
                 ]
                 $sort: index: 1
+                $slice: -50 # hack: meteor servers seem to run on Mongo < 2.6 which require $slice for $sort -> http://docs.mongodb.org/manual/reference/operator/update/sort/#behavior
           , (error) ->
             # todo: error handling
             if error?
