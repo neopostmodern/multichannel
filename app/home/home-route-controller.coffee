@@ -59,6 +59,14 @@ HomeRouteController.events(
         )
     else
       share.RequestUserLogIn()
+
+  'click .mc-home-delete': (event, template, data) ->
+    Meteor.call 'mc.deleteProject', data._id,
+      (error, result) ->
+        if error?
+          Materialize.toast error, 4000, "red"
+        else
+          Materialize.toast "Successfully deleted '#{ data.name }'", 2000
 )
 
 HomeRouteController.helpers(
