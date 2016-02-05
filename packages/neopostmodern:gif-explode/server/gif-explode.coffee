@@ -7,6 +7,7 @@ GifExplode =
     fileStream
       .pipe gifExplode (frame) ->
         index += 1
+        # http://stackoverflow.com/a/18541825/2525299
         Fiber(->
           callback frame
         ).run()
