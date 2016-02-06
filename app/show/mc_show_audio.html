@@ -1,9 +1,11 @@
 <template name="mc_show_audio">
-  <div id="mc-show-audios">
-    {{#each frames}}
-      {{#if isNotEmpty text}}
-        <audio id="mc-show-audio-{{gif}}" src="{{mc_show_textToSpeechSrc text}}" preload="auto"></audio>
-      {{/if}}
-    {{/each}}
-  </div>
+  {{#if noSpeechSynthesis}}
+    <div id="mc-show-audios">
+      {{#each frames}}
+        {{#if isNotEmpty text}}
+          <audio id="mc-show-audio-{{gif}}" src="{{mc_show_textToSpeechSrc text}}" preload="auto"></audio>
+        {{/if}}
+      {{/each}}
+    </div>
+  {{/if}}
 </template>

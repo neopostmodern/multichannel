@@ -8,8 +8,6 @@ SPEED_MAX = 0.5 / INTERVAL
 SPEED_MED = (SPEED_MIN + SPEED_MAX) / 2
 SPEED_INC = (SPEED_MAX - SPEED_MIN) / MAX_REEL_COUNT
 
-VOICE_RSS_KEY = "3becbf8460584fd5959554a73ed38790"
-
 Reels = ({index: iterator, position: 0} for iterator in [0...INITIAL_REEL_COUNT])
 
 share.UnifiedFullscreen =
@@ -117,6 +115,12 @@ ShowRouteController.events(
   'mouseover .mc-show-frame-wrapper': (event, template, data) ->
     if data.text? and data.text.length > 0
       if @state.get 'isAudioEnabled'
+#        Can't use TTS for show because it can't be played simultaneously:
+#        http://stackoverflow.com/questions/31102274/web-speech-api-two-utterances-at-same-time
+#
+#        if TTS.isSupported()
+#          TTS.speak(data.text)
+#        else
         document.getElementById "mc-show-audio-#{ data.gif }"
           .play()
 )
@@ -154,13 +158,8 @@ ShowRouteController.helpers(
 
     return (2 - reel.position) * @state.get('reelHeight') - window.innerHeight
 
-  isNotEmpty: (text) ->
-    text? and text.length > 0
-  mc_show_textToSpeechSrc: (text) ->
-    "https://api.voicerss.org/" +
-      "?src=" + text.replace(new RegExp(" ", 'g'), '+') +
-      "&key=" + VOICE_RSS_KEY +
-      "&hl=" + "en-us"
+  isNotEmpty: (text) -> text? and text.length > 0
+  mc_show_textToSpeechSrc: (text) -> TTS.generateFallbackAudioUrl(text)
 )
 
 Router.route 'show',
