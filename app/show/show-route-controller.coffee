@@ -8,6 +8,8 @@ SPEED_MAX = 0.5 / INTERVAL
 SPEED_MED = (SPEED_MIN + SPEED_MAX) / 2
 SPEED_INC = (SPEED_MAX - SPEED_MIN) / MAX_REEL_COUNT
 
+VOICE_RSS_KEY = "3becbf8460584fd5959554a73ed38790"
+
 Reels = ({index: iterator, position: 0} for iterator in [0...INITIAL_REEL_COUNT])
 
 share.UnifiedFullscreen =
@@ -155,7 +157,10 @@ ShowRouteController.helpers(
   isNotEmpty: (text) ->
     text? and text.length > 0
   mc_show_textToSpeechSrc: (text) ->
-    "http://tts-api.com/tts.mp3?q=" + text.replace(new RegExp(" ", 'g'), '+')
+    "https://api.voicerss.org/" +
+      "?src=" + text.replace(new RegExp(" ", 'g'), '+') +
+      "&key=" + VOICE_RSS_KEY +
+      "&hl=" + "en-us"
 )
 
 Router.route 'show',
