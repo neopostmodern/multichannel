@@ -1,5 +1,6 @@
 <template name="mc_show_audio">
-  {{#if noSpeechSynthesis}}
+  <!-- See show-route-controller.coffee / 'mouseover .mc-show-frame-wrapper' handler -->
+  {{!-- #if noSpeechSynthesis--}}
     <div id="mc-show-audios">
       {{#each frames}}
         {{#if isNotEmpty text}}
@@ -7,5 +8,5 @@
         {{/if}}
       {{/each}}
     </div>
-  {{/if}}
+  {{!--/if--}}
 </template>
