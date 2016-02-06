@@ -14,11 +14,14 @@
           <div class="l3 col">
             <img src="{{imgsrc gif}}" />
           </div>
-          <div class="l8 col">
+          <div class="l7 col">
             <div class="input-field">
               <input type="text" value="{{text}}" id="mc-edit-frame-name-{{gif}}" class="mc-edit-frame-name" length="30" maxlength="30" />
               <label for="mc-edit-frame-name-{{gif}}" class="{{materialHelper text}}">Description</label>
             </div>
+          </div>
+          <div class="l1 col">
+            <a class="btn-flat waves-effect {{#if noSpeechSynthesis}}disabled{{/if}} mc-edit-speak"><i class="mdi-av-volume-up"></i></a>
           </div>
         </div>
       {{/each}}

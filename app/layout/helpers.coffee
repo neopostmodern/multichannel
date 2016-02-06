@@ -7,3 +7,6 @@ UI.registerHelper 'imgsrc', (image) ->
 
 UI.registerHelper 'materialHelper', (text) ->
   if text? and text.length? then " active " else ""
+
+UI.registerHelper 'noSpeechSynthesis', () ->
+  not (window.speechSynthesis? and window.speechSynthesis.getVoices().length > 0)

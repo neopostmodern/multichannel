@@ -47,6 +47,27 @@ EditRouteController.events(
           console.dir error
           return
     )
+  'click .mc-edit-speak': (event, template, data) ->
+    noSpeechSynthesisWarning = ->
+      # todo: pass warning to UI
+      alert("Your browser doesn't seem support speech synthesis.")
+
+    if not window.speechSynthesis?
+      noSpeechSynthesisWarning()
+      return
+
+    voice = window.speechSynthesis.getVoices().filter((v) => v.lang == "en-US")[0]
+    if not voice?
+      # if no en-US take any English
+      window.speechSynthesis.getVoices().filter((v) => v.lang.startsWith("en"))[0]
+    if not voice?
+      noSpeechSynthesisWarning()
+      console.warn("No voices for Speech Synthesis found.")
+      return
+
+    utterance = new SpeechSynthesisUtterance(data.text)
+    utterance.voice = voice
+    window.speechSynthesis.speak(utterance)
 )
 
 Router.route 'edit',
