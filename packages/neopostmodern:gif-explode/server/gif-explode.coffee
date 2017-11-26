@@ -1,10 +1,11 @@
-# import gifExplode from './gif-explode-package'
-Fiber = Npm.require 'fibers'
+import Fiber from 'fibers'
+import explodeGif from './imports/gif-explode-npm'
+
 GifExplode =
-  Do: (fileStream, callback) ->
+  Do: (fileStream, targetFolder, callback) ->
     index = 0
     fileStream
-      .pipe createStream (frame) ->
+      .pipe explodeGif targetFolder, (frame) ->
         index += 1
         # http://stackoverflow.com/a/18541825/2525299
         Fiber(->

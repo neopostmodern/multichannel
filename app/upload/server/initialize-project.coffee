@@ -1,3 +1,5 @@
+import FS from 'fs'
+
 Meteor.methods
   'multichannel.initialize-project': (options) ->
     # todo: reformat code to make more readable
@@ -10,7 +12,7 @@ Meteor.methods
     @unblock()
 
     Projects.insert(
-      name: gif.name()
+      name: gif.name
       originalGif: gif._id
       frames: []
       userId: @userId
@@ -27,36 +29,31 @@ Meteor.methods
 
         # todo: error handling
 
-      frameIndex = 0
-
-      GifExplode.Do gif.createReadStream('gifs'), (frame) ->
-        _frameIndex = frameIndex
-        frameIndex += 1
-        fsFrame = new FS.File()
-        fsFrame.attachData(frame, { type: 'image/gif' })
-        fsFrame.name(Meteor.uuid() + ".gif")
-        Gifs.insert(
-          fsFrame
-        , (error, frameObject) ->
-          # todo: error handling
-          if error?
-            console.dir error
-            return
-
-          Projects.update(_id: projectId,
-            $push:
-              frames:
-                $each: [
-                  gif: frameObject._id
-                  index: _frameIndex
-                ]
-                $sort: index: 1
-                $slice: -50 # hack: meteor servers seem to run on Mongo < 2.6 which require $slice for $sort -> http://docs.mongodb.org/manual/reference/operator/update/sort/#behavior
-          , (error) ->
+      GifExplode.Do FS.ReadStream(gif.path), Meteor.settings.storage.frames, (framePath, frameIndex) ->
+        Gifs.addFile(
+          framePath,
+          {
+            type: 'image/gif'
+          },
+          (error, frameObject) ->
             # todo: error handling
             if error?
               console.dir error
               return
-          )
+
+            Projects.update(_id: projectId,
+              $push:
+                frames:
+                  $each: [
+                    gif: frameObject._id
+                    index: frameIndex
+                  ]
+                  $sort: index: 1
+            , (error) ->
+              # todo: error handling
+              if error?
+                console.dir error
+                return
+            )
         )
     )

@@ -4,9 +4,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-coffeescript
-cfs:standard-packages
-cfs:filesystem
+coffeescript@2.0.2_1
 
 fourseven:scss@3.13.0
 poetic:materialize-scss@1.97.6_1
@@ -15,7 +13,6 @@ neopostmodern:gif-explode
 underscore@1.0.10
 accounts-meteor-developer@1.4.0
 service-configuration@1.0.11
-cfs:gridfs
 accounts-twitter@1.4.0
 accounts-facebook@1.3.0
 accounts-google@1.3.0
@@ -42,3 +39,5 @@ meteor-developer-config-ui
 twitter-config-ui
 dynamic-import
 iron:router
+ostrio:files
+modules

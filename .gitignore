@@ -64,7 +64,7 @@ crashlytics-build.properties
 
 # Meteor specific
 /settings-*.json
-
 node_modules
 
-
+# Project specific
+/gifs/

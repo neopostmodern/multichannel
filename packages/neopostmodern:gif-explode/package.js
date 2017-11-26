@@ -7,8 +7,8 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom("1.0.1");
-  api.use("coffeescript");
-  api.use(["meteor", "ddp", "jquery"]);
+  api.use("coffeescript@2.0.2_1");
+  api.use(["ecmascript", "meteor", "ddp"]);
 
   Npm.depends({
     "fibers": "2.0.0",

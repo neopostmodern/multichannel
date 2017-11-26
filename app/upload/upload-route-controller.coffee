@@ -41,28 +41,28 @@ UploadRouteController.events(
 
     state = @state
 
-    Gifs.insert file, (error, fileObj) ->
-      # Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+    Gifs.insert(
+      file: file
+      streams: 'dynamic'
+      chunkSize: 'dynamic'
+    , false)
+      .on 'end', (error, fileObj) ->
+        # Inserted new doc with ID fileObj._id
 
-      if error?
-        Materialize.toast error, 4000, "red"
-        state.set 'status', 'default'
-        return
+        if error?
+          Materialize.toast error, 4000, "red"
+          state.set 'status', 'default'
+          return
 
-      uploadTracker = Tracker.autorun ->
-        reactiveFileObj = Gifs.findOne fileObj._id
+        Meteor.call 'multichannel.initialize-project', { fileId: fileObj._id }, (error, result) ->
+          if error?
+            Materialize.toast error, 4000, "red"
+            state.set 'status', 'default'
+            return
 
-        if reactiveFileObj.isUploaded()
-          uploadTracker.stop()
-
-          Meteor.call 'multichannel.initialize-project', { fileId: fileObj._id }, (error, result) ->
-            if error?
-              Materialize.toast error, 4000, "red"
-              state.set 'status', 'default'
-              return
-
-            Materialize.toast "Successfully created project", 2000
-            Router.go 'home'
+          Materialize.toast "Successfully created project", 2000
+          Router.go 'home'
+      .start()
 )
 
 UploadRouteController.helpers(
