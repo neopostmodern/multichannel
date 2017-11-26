@@ -11,8 +11,13 @@ Package.onUse(function(api) {
   api.use(["meteor", "ddp", "jquery"]);
 
   Npm.depends({
-    "gif-explode": "0.0.1",
-    "fibers": "1.0.5"
+    "fibers": "2.0.0",
+    "graceful-fs": "4.1.1",
+    "rimraf": "2.2.6",
+    "tmp": "0.0.33",
+    "streamify": "0.3.0",
+    "gifsicle": "3.0.4",
+    "async": "2.6.0"
   });
 
   api.export("GifExplode");
